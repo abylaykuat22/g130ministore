@@ -1,0 +1,31 @@
+-- liquibase formatted sql
+
+-- changeset alisher:1
+CREATE TABLE IF NOT EXISTS users
+(
+    ID BIGSERIAL PRIMARY KEY,
+    USERNAME VARCHAR NOT NULL UNIQUE,
+    PASSWORD_HASH VARCHAR NOT NULL ,
+    FULL_NAME VARCHAR NOT NULL,
+    AGE INT,
+    GENDER VARCHAR
+);
+
+-- changeset magzhan:2
+CREATE TABLE IF NOT EXISTS roles
+(
+    ID BIGSERIAL PRIMARY KEY,
+    NAME VARCHAR NOT NULL UNIQUE,
+    DESCRIPTION TEXT
+);
+
+-- changeset magzhan:3
+CREATE TABLE IF NOT EXISTS user_roles
+(
+    USER_ID BIGINT,
+    ROLE_ID BIGINT,
+    FOREIGN KEY (USER_ID) REFERENCES users(id),
+    FOREIGN KEY (ROLE_ID) REFERENCES roles(id)
+);
+
+
